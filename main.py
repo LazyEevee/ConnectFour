@@ -17,69 +17,110 @@ RADIUS = 40  # radius of player pieces and holes in board
 
 TEXT = pygame.font.SysFont("arial", 50)
 
+COLUMNS = {
+    "column_1": [],
+    "column_2": [],
+    "column_3": [],
+    "column_4": [],
+    "column_5": [],
+    "column_6": [],
+    "column_7": [],
+}
 
-def draw(window, text, column):
+
+def draw(window):
     window.fill(BLUE)
     for x in range(50, WIDTH, 100):
         for y in range(50, HEIGHT-100, 100):
             pygame.draw.circle(window, BLACK, [x, y], RADIUS, 0)
     pygame.draw.rect(window, BLACK, [10, 600, 680, 100], 0)
 
-    WINDOW.blit(text, (20, 620))
-    pygame.draw.circle(WINDOW, YELLOW, [column, 550], RADIUS, 0)
+
+def place_yellow_counter():
+    position = pygame.mouse.get_pos()
+    mouse_x = position[0]
+    mouse_y = position[1]
+    column = (int(ceil(mouse_x / 100)))
+    if mouse_x > 0 and mouse_y < 600:
+        if column == 1:
+            COLUMNS["column_1"].append(YELLOW)
+        if column == 2:
+            COLUMNS["column_2"].append(YELLOW)
+        if column == 3:
+            COLUMNS["column_3"].append(YELLOW)
+        if column == 4:
+            COLUMNS["column_4"].append(YELLOW)
+        if column == 5:
+            COLUMNS["column_5"].append(YELLOW)
+        if column == 6:
+            COLUMNS["column_6"].append(YELLOW)
+        if column == 7:
+            COLUMNS["column_7"].append(YELLOW)
+
+
+def place_red_counter():
+    position = pygame.mouse.get_pos()
+    mouse_x = position[0]
+    mouse_y = position[1]
+    column = (int(ceil(mouse_x / 100)))
+    if mouse_x > 0 and mouse_y < 600:
+        if column == 1:
+            COLUMNS["column_1"].append(RED)
+        if column == 2:
+            COLUMNS["column_2"].append(RED)
+        if column == 3:
+            COLUMNS["column_3"].append(RED)
+        if column == 4:
+            COLUMNS["column_4"].append(RED)
+        if column == 5:
+            COLUMNS["column_5"].append(RED)
+        if column == 6:
+            COLUMNS["column_6"].append(RED)
+        if column == 7:
+            COLUMNS["column_7"].append(RED)
+
+
+def draw_counter():
+    rows = [550, 450, 350, 250, 150, 50]
+    for i in range(len(COLUMNS["column_1"])):
+        pygame.draw.circle(WINDOW, COLUMNS["column_1"][i], [50, rows[i]], RADIUS, 0)
+    for i in range(len(COLUMNS["column_2"])):
+        pygame.draw.circle(WINDOW, COLUMNS["column_2"][i], [150, rows[i]], RADIUS, 0)
+    for i in range(len(COLUMNS["column_3"])):
+        pygame.draw.circle(WINDOW, COLUMNS["column_3"][i], [250, rows[i]], RADIUS, 0)
+    for i in range(len(COLUMNS["column_4"])):
+        pygame.draw.circle(WINDOW, COLUMNS["column_4"][i], [350, rows[i]], RADIUS, 0)
+    for i in range(len(COLUMNS["column_5"])):
+        pygame.draw.circle(WINDOW, COLUMNS["column_5"][i], [450, rows[i]], RADIUS, 0)
+    for i in range(len(COLUMNS["column_6"])):
+        pygame.draw.circle(WINDOW, COLUMNS["column_6"][i], [550, rows[i]], RADIUS, 0)
+    for i in range(len(COLUMNS["column_7"])):
+        pygame.draw.circle(WINDOW, COLUMNS["column_7"][i], [650, rows[i]], RADIUS, 0)
 
 
 def main():
     run = True
     clock = pygame.time.Clock()
-    position = (0, 0)
-    mouse_position_text = TEXT.render("Start", True, BLUE)
-    column = -50
-
-    column_1 = []
-    column_2 = []
-    column_3 = []
-    column_4 = []
-    column_5 = []
-    column_6 = []
-    column_7 = []
+    player_one = True
+    draw(WINDOW)
 
     while run:
+        draw_counter()
+        pygame.display.update()
         clock.tick(FPS)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 break
             if event.type == pygame.MOUSEBUTTONUP:
-                position = pygame.mouse.get_pos()
-                mouse_x = position[0]
-                mouse_y = position[1]
-                column = (int(ceil(mouse_x / 100)) * 100) - 50
-                if mouse_x > 0 and mouse_y < 600:
-                    if column == 50:
-                        column_1.append("yellow")
-                        mouse_position_text = TEXT.render(f"{position}, {column_1}", True, BLUE)
-                    if column == 150:
-                        column_2.append("yellow")
-                        mouse_position_text = TEXT.render(f"{position}, {column_2}", True, BLUE)
-                    if column == 250:
-                        column_3.append("yellow")
-                        mouse_position_text = TEXT.render(f"{position}, {column_3}", True, BLUE)
-                    if column == 350:
-                        column_4.append("yellow")
-                        mouse_position_text = TEXT.render(f"{position}, {column_4}", True, BLUE)
-                    if column == 450:
-                        column_5.append("yellow")
-                        mouse_position_text = TEXT.render(f"{position}, {column_5}", True, BLUE)
-                    if column == 550:
-                        column_6.append("yellow")
-                        mouse_position_text = TEXT.render(f"{position}, {column_6}", True, BLUE)
-                    if column == 650:
-                        column_7.append("yellow")
-                        mouse_position_text = TEXT.render(f"{position}, {column_7}", True, BLUE)
+                if player_one:
+                    place_yellow_counter()
+                    player_one = False
+                else:
+                    place_red_counter()
+                    player_one = True
 
-        draw(WINDOW, mouse_position_text, column)
-        pygame.display.update()
     pygame.quit()
 
 
