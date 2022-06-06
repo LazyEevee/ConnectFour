@@ -28,6 +28,13 @@ COLUMNS = {
 }
 
 
+def display_turns(player_one):
+    if player_one:
+        WINDOW.blit(TEXT.render("Player 1", True, YELLOW), (20, 620))
+    else:
+        WINDOW.blit(TEXT.render("Player 2", True, RED), (20, 620))
+
+
 def draw(window):
     window.fill(BLUE)
     for x in range(50, WIDTH, 100):
@@ -102,12 +109,12 @@ def main():
     run = True
     clock = pygame.time.Clock()
     player_one = True
-    draw(WINDOW)
 
     while run:
-        draw_counter()
-        pygame.display.update()
         clock.tick(FPS)
+        draw(WINDOW)
+        draw_counter()
+        display_turns(player_one)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -120,6 +127,8 @@ def main():
                 else:
                     place_red_counter()
                     player_one = True
+
+        pygame.display.update()
 
     pygame.quit()
 
