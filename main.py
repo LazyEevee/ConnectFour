@@ -48,13 +48,13 @@ def draw(window):
 
 def place_yellow_counter(mouse_x, mouse_y, column):
     """ add YELLOW counters to COLUMNS lists """
-    if mouse_x > 0 and mouse_y < 600 and len(COLUMNS["column_{0}".format(column)]) < 7:
+    if mouse_x > 0 and mouse_y < 600:
         COLUMNS["column_{0}".format(column)].append(YELLOW)
 
 
 def place_red_counter(mouse_x, mouse_y, column):
     """ add RED counters to COLUMNS lists """
-    if mouse_x > 0 and mouse_y < 600 and len(COLUMNS["column_{0}".format(column)]) < 7:
+    if mouse_x > 0 and mouse_y < 600:
         COLUMNS["column_{0}".format(column)].append(RED)
 
 
@@ -80,7 +80,7 @@ def main():
     run = True
     clock = pygame.time.Clock()
     player_one = True
-
+    message_text = ""
     while run:
         clock.tick(FPS)
         draw(WINDOW)
@@ -97,12 +97,21 @@ def main():
                 break
             if event.type == pygame.MOUSEBUTTONUP:
                 if player_one:
-                    place_yellow_counter(mouse_x, mouse_y, column)
-                    player_one = False
+                    if len(COLUMNS["column_{0}".format(column)]) < 6:
+                        place_yellow_counter(mouse_x, mouse_y, column)
+                        player_one = False
+                        message_text = ""
+                    else:
+                        message_text = "Invalid Move"
                 else:
-                    place_red_counter(mouse_x, mouse_y, column)
-                    player_one = True
+                    if len(COLUMNS["column_{0}".format(column)]) < 6:
+                        place_red_counter(mouse_x, mouse_y, column)
+                        player_one = True
+                        message_text = ""
+                    else:
+                        message_text = "Invalid Move"
 
+        WINDOW.blit(TEXT.render(message_text, True, BLUE), (350, 620))
         pygame.display.update()
 
     pygame.quit()
