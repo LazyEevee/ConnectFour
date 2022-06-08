@@ -1,5 +1,6 @@
 import pygame
 from math import ceil
+
 pygame.init()
 
 WIDTH, HEIGHT = 700, 700
@@ -41,7 +42,7 @@ def draw(window):
     """ draw the game grid on screen """
     window.fill(BLUE)
     for x in range(50, WIDTH, 100):
-        for y in range(50, HEIGHT-100, 100):
+        for y in range(50, HEIGHT - 100, 100):
             pygame.draw.circle(window, BLACK, [x, y], RADIUS, 0)
     pygame.draw.rect(window, BLACK, [10, 600, 680, 100], 0)
 
@@ -76,11 +77,74 @@ def draw_counter():
         pygame.draw.circle(WINDOW, COLUMNS["column_7"][i], [650, ROWS[i]], RADIUS, 0)
 
 
+def p1_win():
+    if len(COLUMNS["column_1"]) > 3:
+        if COLUMNS["column_1"][0] == YELLOW and COLUMNS["column_1"][1] == YELLOW and COLUMNS["column_1"][2] == YELLOW \
+                and COLUMNS["column_1"][3] == YELLOW:
+            return True
+    if len(COLUMNS["column_2"]) > 3:
+        if COLUMNS["column_2"][0] == YELLOW and COLUMNS["column_2"][1] == YELLOW and COLUMNS["column_2"][2] == YELLOW \
+                and COLUMNS["column_2"][3] == YELLOW:
+            return True
+    if len(COLUMNS["column_3"]) > 3:
+        if COLUMNS["column_3"][0] == YELLOW and COLUMNS["column_3"][1] == YELLOW and COLUMNS["column_3"][2] == YELLOW \
+                and COLUMNS["column_3"][3] == YELLOW:
+            return True
+    if len(COLUMNS["column_4"]) > 3:
+        if COLUMNS["column_4"][0] == YELLOW and COLUMNS["column_4"][1] == YELLOW and COLUMNS["column_4"][2] == YELLOW \
+                and COLUMNS["column_4"][3] == YELLOW:
+            return True
+    if len(COLUMNS["column_5"]) > 3:
+        if COLUMNS["column_5"][0] == YELLOW and COLUMNS["column_5"][1] == YELLOW and COLUMNS["column_5"][2] == YELLOW \
+                and COLUMNS["column_5"][3] == YELLOW:
+            return True
+    if len(COLUMNS["column_6"]) > 3:
+        if COLUMNS["column_6"][0] == YELLOW and COLUMNS["column_6"][1] == YELLOW and COLUMNS["column_6"][2] == YELLOW \
+                and COLUMNS["column_6"][3] == YELLOW:
+            return True
+    if len(COLUMNS["column_7"]) > 3:
+        if COLUMNS["column_7"][0] == YELLOW and COLUMNS["column_7"][1] == YELLOW and COLUMNS["column_7"][2] == YELLOW \
+                and COLUMNS["column_7"][3] == YELLOW:
+            return True
+
+
+def p2_win():
+    if len(COLUMNS["column_1"]) > 3:
+        if COLUMNS["column_1"][0] == RED and COLUMNS["column_1"][1] == RED and COLUMNS["column_1"][2] == RED \
+                and COLUMNS["column_1"][3] == RED:
+            return True
+    if len(COLUMNS["column_2"]) > 3:
+        if COLUMNS["column_2"][0] == RED and COLUMNS["column_2"][1] == RED and COLUMNS["column_2"][2] == RED \
+                and COLUMNS["column_2"][3] == RED:
+            return True
+    if len(COLUMNS["column_3"]) > 3:
+        if COLUMNS["column_3"][0] == RED and COLUMNS["column_3"][1] == RED and COLUMNS["column_3"][2] == RED \
+                and COLUMNS["column_3"][3] == RED:
+            return True
+    if len(COLUMNS["column_4"]) > 3:
+        if COLUMNS["column_4"][0] == RED and COLUMNS["column_4"][1] == RED and COLUMNS["column_4"][2] == RED \
+                and COLUMNS["column_4"][3] == RED:
+            return True
+    if len(COLUMNS["column_5"]) > 3:
+        if COLUMNS["column_5"][0] == RED and COLUMNS["column_5"][1] == RED and COLUMNS["column_5"][2] == RED \
+                and COLUMNS["column_5"][3] == RED:
+            return True
+    if len(COLUMNS["column_6"]) > 3:
+        if COLUMNS["column_6"][0] == RED and COLUMNS["column_6"][1] == RED and COLUMNS["column_6"][2] == RED \
+                and COLUMNS["column_6"][3] == RED:
+            return True
+    if len(COLUMNS["column_7"]) > 3:
+        if COLUMNS["column_7"][0] == RED and COLUMNS["column_7"][1] == RED and COLUMNS["column_7"][2] == RED \
+                and COLUMNS["column_7"][3] == RED:
+            return True
+
+
 def main():
     run = True
     clock = pygame.time.Clock()
     player_one = True
     message_text = ""
+
     while run:
         clock.tick(FPS)
         draw(WINDOW)
@@ -110,6 +174,10 @@ def main():
                         message_text = ""
                     else:
                         message_text = "Invalid Move"
+        if p1_win():
+            message_text = "Player 1 Wins!"
+        if p2_win():
+            message_text = "Player 2 Wins!"
 
         WINDOW.blit(TEXT.render(message_text, True, BLUE), (350, 620))
         pygame.display.update()
