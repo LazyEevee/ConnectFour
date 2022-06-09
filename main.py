@@ -86,6 +86,15 @@ def check_win():
                     return True
 
 
+def check_tie():
+    full_columns = 0
+    for i in COLUMNS:
+        if len(COLUMNS[i]) >= 6:
+            full_columns += 1
+    if full_columns == 7:
+        return True
+
+
 def reset():
     for i in COLUMNS:
         COLUMNS[i] = []
@@ -96,12 +105,13 @@ def main():
     clock = pygame.time.Clock()
     player_one = True
     message_text = ""
-    won = False
+    colour = BLUE
+    end_text = ""
+    end = False
 
     while run:
         clock.tick(FPS)
         draw(WINDOW)
-
         display_turns(player_one)
         position = pygame.mouse.get_pos()
         mouse_x = position[0]
@@ -117,8 +127,8 @@ def main():
                 if event.key == pygame.K_r:
                     reset()
                     player_one = True
-                    won = False
-            if event.type == pygame.MOUSEBUTTONUP and not won:
+                    end = False
+            if event.type == pygame.MOUSEBUTTONUP and not end:
                 if player_one:
                     if len(COLUMNS[column]) < 6:
                         place_yellow_counter(mouse_x, mouse_y, column)
@@ -135,19 +145,23 @@ def main():
                         message_text = "Invalid Move"
 
         if check_win():
-            won = True
+            end = True
             if player_one:
-                win_text = "Player 2 Wins!"
+                end_text = "Player 2 Wins!"
                 colour = RED
             else:
-                win_text = "Player 1 Wins!"
+                end_text = "Player 1 Wins!"
                 colour = YELLOW
 
-            if won:
-                draw_counter()
-                pygame.draw.rect(WINDOW, BLACK, [10, 600, 680, 100], 0)
-                WINDOW.blit(TEXT.render(win_text + " Press R to restart", True, colour), (20, 620))
-                pygame.display.update()
+        if check_tie():
+            end = True
+            end_text = "It's a Tie!"
+            colour = BLUE
+
+        if end:
+            draw_counter()
+            pygame.draw.rect(WINDOW, BLACK, [10, 600, 680, 100], 0)
+            WINDOW.blit(TEXT.render(end_text + " Press R to restart", True, colour), (20, 620))
 
         WINDOW.blit(TEXT.render(message_text, True, BLUE), (350, 620))
         pygame.display.update()
