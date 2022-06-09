@@ -71,30 +71,27 @@ def draw_counter():
 
 def check_win():
     # check for vertical win
-    for i in range(1, len(COLUMNS)+1):
-        if len(COLUMNS[i]) > 3:
-            for j in range(len(COLUMNS[i])-3):
+    for i in range(1, 8):
+        for j in range(0, 3):
+            if len(COLUMNS[i]) >= j+4:
                 if COLUMNS[i][j] == COLUMNS[i][j+1] == COLUMNS[i][j+2] == COLUMNS[i][j+3]:
                     return True
     # check for horizontal win
-    for i in range(1, len(COLUMNS)-2):
-        for j in range(len(COLUMNS[i])):
-            if len(COLUMNS[i]) > j and len(COLUMNS[i + 1]) > j and len(COLUMNS[i + 2]) > j and len(
-                    COLUMNS[i + 3]) > j:
+    for i in range(1, 5):
+        for j in range(0, 6):
+            if len(COLUMNS[i]) > j and len(COLUMNS[i+1]) > j and len(COLUMNS[i+2]) > j and len(COLUMNS[i+3]) > j:
                 if COLUMNS[i][j] == COLUMNS[i+1][j] == COLUMNS[i+2][j] == COLUMNS[i+3][j]:
                     return True
     # check for diagonal up/right win
     for i in range(1, 5):
         for j in range(0, 3):
-            if len(COLUMNS[i]) > j and len(COLUMNS[i + 1]) > j+1 and len(COLUMNS[i + 2]) > j+2 and len(
-                    COLUMNS[i + 3]) > j+3:
+            if len(COLUMNS[i]) > j and len(COLUMNS[i+1]) > j+1 and len(COLUMNS[i+2]) > j+2 and len(COLUMNS[i+3]) > j+3:
                 if COLUMNS[i][j] == COLUMNS[i+1][j+1] == COLUMNS[i+2][j+2] == COLUMNS[i+3][j+3]:
                     return True
     # check for diagonal up/left win
     for i in range(4, 8):
         for j in range(0, 3):
-            if len(COLUMNS[i]) > j and len(COLUMNS[i - 1]) > j+1 and len(COLUMNS[i - 2]) > j+2 and len(
-                    COLUMNS[i - 3]) > j+3:
+            if len(COLUMNS[i]) > j and len(COLUMNS[i-1]) > j+1 and len(COLUMNS[i-2]) > j+2 and len(COLUMNS[i-3]) > j+3:
                 if COLUMNS[i][j] == COLUMNS[i-1][j+1] == COLUMNS[i-2][j+2] == COLUMNS[i-3][j+3]:
                     return True
 
