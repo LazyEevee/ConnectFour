@@ -53,20 +53,10 @@ def place_red_counter(mouse_x, mouse_y, column):
 
 def draw_counter():
     """ draw counters into grid """
-    for i in range(len(COLUMNS[1])):
-        pygame.draw.circle(WINDOW, COLUMNS[1][i], [50, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS[2])):
-        pygame.draw.circle(WINDOW, COLUMNS[2][i], [150, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS[3])):
-        pygame.draw.circle(WINDOW, COLUMNS[3][i], [250, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS[4])):
-        pygame.draw.circle(WINDOW, COLUMNS[4][i], [350, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS[5])):
-        pygame.draw.circle(WINDOW, COLUMNS[5][i], [450, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS[6])):
-        pygame.draw.circle(WINDOW, COLUMNS[6][i], [550, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS[7])):
-        pygame.draw.circle(WINDOW, COLUMNS[7][i], [650, ROWS[i]], RADIUS, 0)
+    for i in COLUMNS:
+        for j in range(len(COLUMNS[i])):
+            column_position = 50+((i-1)*100)
+            pygame.draw.circle(WINDOW, COLUMNS[i][j], [column_position, ROWS[j]], RADIUS, 0)
 
 
 def check_win():
