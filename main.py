@@ -106,6 +106,7 @@ def main():
     clock = pygame.time.Clock()
     player_one = True
     message_text = ""
+    won = False
 
     while run:
         clock.tick(FPS)
@@ -126,7 +127,8 @@ def main():
                 if event.key == pygame.K_r:
                     reset()
                     player_one = True
-            if event.type == pygame.MOUSEBUTTONUP:
+                    won = False
+            if event.type == pygame.MOUSEBUTTONUP and not won:
                 if player_one:
                     if len(COLUMNS[column]) < 6:
                         place_yellow_counter(mouse_x, mouse_y, column)
