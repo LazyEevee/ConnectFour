@@ -96,6 +96,11 @@ def check_win():
                     return True
 
 
+def reset():
+    for i in COLUMNS:
+        COLUMNS[i] = []
+
+
 def main():
     run = True
     clock = pygame.time.Clock()
@@ -105,6 +110,7 @@ def main():
     while run:
         clock.tick(FPS)
         draw(WINDOW)
+
         display_turns(player_one)
         position = pygame.mouse.get_pos()
         mouse_x = position[0]
@@ -116,6 +122,10 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
                 break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    reset()
+                    player_one = True
             if event.type == pygame.MOUSEBUTTONUP:
                 if player_one:
                     if len(COLUMNS[column]) < 6:
@@ -133,10 +143,19 @@ def main():
                         message_text = "Invalid Move"
 
         if check_win():
+            won = True
             if player_one:
-                message_text = "Player 2 Wins!"
+                win_text = "Player 2 Wins!"
+                colour = RED
             else:
-                message_text = "Player 1 Wins!"
+                win_text = "Player 1 Wins!"
+                colour = YELLOW
+
+            if won:
+                draw_counter()
+                pygame.draw.rect(WINDOW, BLACK, [10, 600, 680, 100], 0)
+                WINDOW.blit(TEXT.render(win_text + " Press R to restart", True, colour), (20, 620))
+                pygame.display.update()
 
         WINDOW.blit(TEXT.render(message_text, True, BLUE), (350, 620))
         pygame.display.update()
