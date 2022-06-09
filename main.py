@@ -18,15 +18,7 @@ RADIUS = 40  # radius of player pieces and holes in board
 
 TEXT = pygame.font.SysFont("arial", 50)
 
-COLUMNS = {
-    "column_1": [],
-    "column_2": [],
-    "column_3": [],
-    "column_4": [],
-    "column_5": [],
-    "column_6": [],
-    "column_7": [],
-}
+COLUMNS = {1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: []}
 ROWS = [550, 450, 350, 250, 150, 50]
 
 
@@ -50,93 +42,45 @@ def draw(window):
 def place_yellow_counter(mouse_x, mouse_y, column):
     """ add YELLOW counters to COLUMNS lists """
     if mouse_x > 0 and mouse_y < 600:
-        COLUMNS["column_{0}".format(column)].append(YELLOW)
+        COLUMNS[column].append(YELLOW)
 
 
 def place_red_counter(mouse_x, mouse_y, column):
     """ add RED counters to COLUMNS lists """
     if mouse_x > 0 and mouse_y < 600:
-        COLUMNS["column_{0}".format(column)].append(RED)
+        COLUMNS[column].append(RED)
 
 
 def draw_counter():
     """ draw counters into grid """
-    for i in range(len(COLUMNS["column_1"])):
-        pygame.draw.circle(WINDOW, COLUMNS["column_1"][i], [50, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS["column_2"])):
-        pygame.draw.circle(WINDOW, COLUMNS["column_2"][i], [150, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS["column_3"])):
-        pygame.draw.circle(WINDOW, COLUMNS["column_3"][i], [250, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS["column_4"])):
-        pygame.draw.circle(WINDOW, COLUMNS["column_4"][i], [350, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS["column_5"])):
-        pygame.draw.circle(WINDOW, COLUMNS["column_5"][i], [450, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS["column_6"])):
-        pygame.draw.circle(WINDOW, COLUMNS["column_6"][i], [550, ROWS[i]], RADIUS, 0)
-    for i in range(len(COLUMNS["column_7"])):
-        pygame.draw.circle(WINDOW, COLUMNS["column_7"][i], [650, ROWS[i]], RADIUS, 0)
+    for i in range(len(COLUMNS[1])):
+        pygame.draw.circle(WINDOW, COLUMNS[1][i], [50, ROWS[i]], RADIUS, 0)
+    for i in range(len(COLUMNS[2])):
+        pygame.draw.circle(WINDOW, COLUMNS[2][i], [150, ROWS[i]], RADIUS, 0)
+    for i in range(len(COLUMNS[3])):
+        pygame.draw.circle(WINDOW, COLUMNS[3][i], [250, ROWS[i]], RADIUS, 0)
+    for i in range(len(COLUMNS[4])):
+        pygame.draw.circle(WINDOW, COLUMNS[4][i], [350, ROWS[i]], RADIUS, 0)
+    for i in range(len(COLUMNS[5])):
+        pygame.draw.circle(WINDOW, COLUMNS[5][i], [450, ROWS[i]], RADIUS, 0)
+    for i in range(len(COLUMNS[6])):
+        pygame.draw.circle(WINDOW, COLUMNS[6][i], [550, ROWS[i]], RADIUS, 0)
+    for i in range(len(COLUMNS[7])):
+        pygame.draw.circle(WINDOW, COLUMNS[7][i], [650, ROWS[i]], RADIUS, 0)
 
 
-def p1_win():
-    if len(COLUMNS["column_1"]) > 3:
-        if COLUMNS["column_1"][0] == YELLOW and COLUMNS["column_1"][1] == YELLOW and COLUMNS["column_1"][2] == YELLOW \
-                and COLUMNS["column_1"][3] == YELLOW:
-            return True
-    if len(COLUMNS["column_2"]) > 3:
-        if COLUMNS["column_2"][0] == YELLOW and COLUMNS["column_2"][1] == YELLOW and COLUMNS["column_2"][2] == YELLOW \
-                and COLUMNS["column_2"][3] == YELLOW:
-            return True
-    if len(COLUMNS["column_3"]) > 3:
-        if COLUMNS["column_3"][0] == YELLOW and COLUMNS["column_3"][1] == YELLOW and COLUMNS["column_3"][2] == YELLOW \
-                and COLUMNS["column_3"][3] == YELLOW:
-            return True
-    if len(COLUMNS["column_4"]) > 3:
-        if COLUMNS["column_4"][0] == YELLOW and COLUMNS["column_4"][1] == YELLOW and COLUMNS["column_4"][2] == YELLOW \
-                and COLUMNS["column_4"][3] == YELLOW:
-            return True
-    if len(COLUMNS["column_5"]) > 3:
-        if COLUMNS["column_5"][0] == YELLOW and COLUMNS["column_5"][1] == YELLOW and COLUMNS["column_5"][2] == YELLOW \
-                and COLUMNS["column_5"][3] == YELLOW:
-            return True
-    if len(COLUMNS["column_6"]) > 3:
-        if COLUMNS["column_6"][0] == YELLOW and COLUMNS["column_6"][1] == YELLOW and COLUMNS["column_6"][2] == YELLOW \
-                and COLUMNS["column_6"][3] == YELLOW:
-            return True
-    if len(COLUMNS["column_7"]) > 3:
-        if COLUMNS["column_7"][0] == YELLOW and COLUMNS["column_7"][1] == YELLOW and COLUMNS["column_7"][2] == YELLOW \
-                and COLUMNS["column_7"][3] == YELLOW:
-            return True
-
-
-def p2_win():
-    if len(COLUMNS["column_1"]) > 3:
-        if COLUMNS["column_1"][0] == RED and COLUMNS["column_1"][1] == RED and COLUMNS["column_1"][2] == RED \
-                and COLUMNS["column_1"][3] == RED:
-            return True
-    if len(COLUMNS["column_2"]) > 3:
-        if COLUMNS["column_2"][0] == RED and COLUMNS["column_2"][1] == RED and COLUMNS["column_2"][2] == RED \
-                and COLUMNS["column_2"][3] == RED:
-            return True
-    if len(COLUMNS["column_3"]) > 3:
-        if COLUMNS["column_3"][0] == RED and COLUMNS["column_3"][1] == RED and COLUMNS["column_3"][2] == RED \
-                and COLUMNS["column_3"][3] == RED:
-            return True
-    if len(COLUMNS["column_4"]) > 3:
-        if COLUMNS["column_4"][0] == RED and COLUMNS["column_4"][1] == RED and COLUMNS["column_4"][2] == RED \
-                and COLUMNS["column_4"][3] == RED:
-            return True
-    if len(COLUMNS["column_5"]) > 3:
-        if COLUMNS["column_5"][0] == RED and COLUMNS["column_5"][1] == RED and COLUMNS["column_5"][2] == RED \
-                and COLUMNS["column_5"][3] == RED:
-            return True
-    if len(COLUMNS["column_6"]) > 3:
-        if COLUMNS["column_6"][0] == RED and COLUMNS["column_6"][1] == RED and COLUMNS["column_6"][2] == RED \
-                and COLUMNS["column_6"][3] == RED:
-            return True
-    if len(COLUMNS["column_7"]) > 3:
-        if COLUMNS["column_7"][0] == RED and COLUMNS["column_7"][1] == RED and COLUMNS["column_7"][2] == RED \
-                and COLUMNS["column_7"][3] == RED:
-            return True
+def check_win():
+    for i in range(1, len(COLUMNS)+1):
+        if len(COLUMNS[i]) > 3:
+            for j in range(len(COLUMNS[i])-3):
+                if COLUMNS[i][j] == COLUMNS[i][j+1] == COLUMNS[i][j+2] == COLUMNS[i][j+3]:
+                    return True
+    for i in range(1, len(COLUMNS)-2):
+        for j in range(len(COLUMNS[i])):
+            if len(COLUMNS[i]) > j and len(COLUMNS[i + 1]) > j and len(COLUMNS[i + 2]) > j and len(
+                    COLUMNS[i + 3]) > j:
+                if COLUMNS[i][j] == COLUMNS[i+1][j] == COLUMNS[i+2][j] == COLUMNS[i+3][j]:
+                    return True
 
 
 def main():
@@ -161,23 +105,25 @@ def main():
                 break
             if event.type == pygame.MOUSEBUTTONUP:
                 if player_one:
-                    if len(COLUMNS["column_{0}".format(column)]) < 6:
+                    if len(COLUMNS[column]) < 6:
                         place_yellow_counter(mouse_x, mouse_y, column)
                         player_one = False
                         message_text = ""
                     else:
                         message_text = "Invalid Move"
                 else:
-                    if len(COLUMNS["column_{0}".format(column)]) < 6:
+                    if len(COLUMNS[column]) < 6:
                         place_red_counter(mouse_x, mouse_y, column)
                         player_one = True
                         message_text = ""
                     else:
                         message_text = "Invalid Move"
-        if p1_win():
-            message_text = "Player 1 Wins!"
-        if p2_win():
-            message_text = "Player 2 Wins!"
+
+        if check_win():
+            if player_one:
+                message_text = "Player 2 Wins!"
+            else:
+                message_text = "Player 1 Wins!"
 
         WINDOW.blit(TEXT.render(message_text, True, BLUE), (350, 620))
         pygame.display.update()
